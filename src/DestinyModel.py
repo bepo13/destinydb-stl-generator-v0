@@ -13,14 +13,14 @@ class DestinyModelClass(object):
             # Verify the magic number
             self.magicNumber = int.from_bytes(f.read(4), byteorder='little')
             if self.magicNumber != 572728357:
-                print("Invalid magic number: ", self.magicNumber, " exiting...")
+                print("Invalid magic number: "+str(self.magicNumber)+" exiting...")
                 return
             
-            print("Correct magic number:", self.magicNumber)
+            print("Correct magic number: "+str(self.magicNumber))
             
             # Read data into a byte array
             data = bytearray(f.read())
-            print("Read ", len(data), " bytes into the byte array...")
+            print("Read "+str(len(data))+" bytes into the byte array...")
             
             # Decompress the binary data
             data = zlib.decompress(data)
@@ -33,10 +33,13 @@ class DestinyModelClass(object):
     
             # Process textures
             print("Processing textures...")
-            self.textures = DestinyTexture.DestinyTextureClass(data)
+            self.textures = DestinyTexture.parse(data)
             
             # Process geometries
             print("Processing geometries...")
-            self.geometry = DestinyGeometry.DestinyGeometryClass(data)
+            self.geometry = DestinyGeometry.parse(data)
                 
         return
+    
+def parse(file):
+    return DestinyModelClass(file)

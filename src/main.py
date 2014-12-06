@@ -14,18 +14,18 @@ playerGeomBoots = "geom/1698410142.geom"
 playerGeomClass = "geom/3790886867.geom"
 
 if __name__ == '__main__':
-    # Parse destinydb geom file and generate .stl output for a single item model
+    # Parse single destinydb geom file and generate item model .stl output
     itemModel = []
-    itemModel.append(DestinyModel.DestinyModelClass(itemGeom))
+    itemModel.append(DestinyModel.parse(itemGeom))
     DestinyModelGenStl.generate(itemModel, itemName, itemFileName)
     
+    # Parse multiple destinydb geom files and generate player model .stl output
     playerModel = []
-    playerModel.append(DestinyModel.DestinyModelClass(playerGeomHead))
-    playerModel.append(DestinyModel.DestinyModelClass(playerGeomBody))
-    playerModel.append(DestinyModel.DestinyModelClass(playerGeomGloves))
-    playerModel.append(DestinyModel.DestinyModelClass(playerGeomBoots))
-    playerModel.append(DestinyModel.DestinyModelClass(playerGeomClass))
-    
+    playerModel.append(DestinyModel.parse(playerGeomHead))
+    playerModel.append(DestinyModel.parse(playerGeomBody))
+    playerModel.append(DestinyModel.parse(playerGeomGloves))
+    playerModel.append(DestinyModel.parse(playerGeomBoots))
+    playerModel.append(DestinyModel.parse(playerGeomClass))
     DestinyModelGenStl.generate(playerModel, playerName, playerFileName)
     
     print("Done")

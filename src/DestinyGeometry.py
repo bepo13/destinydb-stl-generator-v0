@@ -355,3 +355,6 @@ class DestinyGeometryClass:
             i -= 1
         
         return
+    
+def parse(data):
+    return DestinyGeometryClass(data)

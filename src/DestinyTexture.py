@@ -12,3 +12,6 @@ class DestinyTextureClass:
             self.textures.append(data.readUTF())
             i -= 1
         return
+    
+def parse(data):
+    return DestinyTextureClass(data)
